@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\WhatsDown.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\WhatsDown.ico" />
+  </ItemGroup>
+
 </Project>

@@ -4,6 +4,6 @@ namespace WhatsDown.WPF.Interfaces;
 
 interface INavigationService
 {
-    ViewModelBase CurrentViewModel { get; }
-    void NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
+    BaseViewModel CurrentViewModel { get; }
+    void NavigateTo<TViewModel>() where TViewModel : BaseViewModel;
 }

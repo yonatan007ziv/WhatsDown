@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using WhatsDown.Core.Interfaces;
 using WhatsDown.Server.Interfaces.Services;
 using WhatsDown.Server.Networking.Clients.Servers;
 using WhatsDown.Server.Services;
@@ -20,7 +22,7 @@ public class Program
         services.AddSingleton(configuration);
         services.AddSingleton<ILogger, ConsoleLogger>();
         services.AddSingleton<IConfigurationService, ConfigurationService>();
-        services.AddTransient<IEmailSender, SmtpService>();
+        services.AddTransient<IEmailSendingService, SmtpService>();
 
         ServiceLocator.ServiceProvider = services.BuildServiceProvider();
 

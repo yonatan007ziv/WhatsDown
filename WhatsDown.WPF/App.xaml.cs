@@ -14,37 +14,19 @@ namespace WhatsDown.WPF;
 /// </summary>
 public partial class App : Application
 {
-    IServiceProvider _serviceProvider;
+    private readonly IServiceProvider _serviceProvider;
 
     public App()
     {
         IServiceCollection services = new ServiceCollection();
 
-        // View Model Factory
-        services.AddSingleton<Func<Type, ViewModelBase>>(
-            provider =>
-            viewModelType =>
-            (ViewModelBase)provider.GetRequiredService(viewModelType));
-        // Navigation Service
-        services.AddSingleton<INavigationService, NavigationService>();
-        // Main Window
-        services.AddSingleton(provider => new MainWindow
-        {
-            DataContext = provider.GetRequiredService<MainWindowViewModel>()
-        });
-
-        // View Models Registration
-        services.AddSingleton<MainWindowViewModel>();
-        services.AddSingleton<MainMenuViewModel>();
-        services.AddSingleton<LoginViewModel>();
-        services.AddSingleton<RegisterViewModel>();
-
+        new ServiceRegistration(services).AddServices();
         _serviceProvider = services.BuildServiceProvider();
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
         _serviceProvider.GetRequiredService<MainWindow>().Show();
+        base.OnStartup(e);
     }
 }

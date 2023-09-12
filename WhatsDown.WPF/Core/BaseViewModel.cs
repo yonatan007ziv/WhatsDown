@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using WhatsDown.WPF.Interfaces;
 
 namespace WhatsDown.WPF.Core;
 
-public abstract class ViewModelBase : INotifyPropertyChanged
+public abstract class BaseViewModel : INotifyPropertyChanged, IViewTransition
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -11,4 +12,7 @@ public abstract class ViewModelBase : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    public abstract void Enter();
+    public abstract void Exit();
 }

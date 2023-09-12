@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Sockets;
+using WhatsDown.Core.Interfaces;
 using WhatsDown.Server.Handlers;
 using WhatsDown.Server.Interfaces.Services;
 
@@ -38,27 +39,12 @@ internal class TcpServer
             try
             {
                 ClientCommunicationHandler client = new ClientCommunicationHandler(await listener.AcceptTcpClientAsync());
-                client.HandleClient();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 continue;
             }
-        }
-    }
-
-    private void RunClient(ClientCommunicationHandler client)
-    {
-        try
-        {
-            connectedClients.Add(client);
-            client.HandleClient();
-        }
-        catch (Exception ex)
-        {
-            connectedClients.Remove(client);
-            logger.LogError(ex.Message);
         }
     }
 }

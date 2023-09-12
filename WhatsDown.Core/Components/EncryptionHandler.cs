@@ -5,36 +5,62 @@ namespace WhatsDown.Core.Components;
 
 public class EncryptionHandler : IEncryptionHandler
 {
-    public RSA Rsa { get; private set; } = RSA.Create();
-    public Aes Aes { get; private set; } = Aes.Create();
+    private readonly RSA rsa = RSA.Create();
+    private readonly Aes aes = Aes.Create();
+
+    public EncryptionHandler()
+    {
+        aes.Padding = PaddingMode.PKCS7;
+        aes.Mode = CipherMode.CBC;
+    }
 
     public byte[] EncryptAes(byte[] buffer)
     {
-        return Aes.CreateEncryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        return aes.CreateEncryptor().TransformFinalBlock(buffer, 0, buffer.Length);
     }
 
     public byte[] EncryptRsa(byte[] buffer)
     {
-        return Rsa.EncryptValue(buffer);
+        return rsa.Encrypt(buffer, RSAEncryptionPadding.OaepSHA256);
     }
 
     public byte[] DecryptAes(byte[] buffer)
     {
-        return Aes.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        return aes.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length);
     }
 
     public byte[] DecryptRsa(byte[] buffer)
     {
-        return Rsa.DecryptValue(buffer);
-    }
-
-    public byte[] ExportAes()
-    {
-        return Aes.Key.Concat(Aes.IV).ToArray();
+        return rsa.Decrypt(buffer, RSAEncryptionPadding.OaepSHA256);
     }
 
     public void ImportRsa(byte[] rsaPublicKey)
     {
-        Rsa.ImportRSAPublicKey(rsaPublicKey, out _);
+        rsa.ImportRSAPublicKey(rsaPublicKey, out _);
+    }
+
+    public byte[] ExportRsa()
+    {
+        return rsa.ExportRSAPublicKey();
+    }
+
+    public void ImportAesPrivateKey(byte[] aesPrivateKey)
+    {
+        aes.Key = aesPrivateKey;
+    }
+
+    public void ImportAesIv(byte[] aesIv)
+    {
+        aes.IV = aesIv;
+    }
+
+    public byte[] ExportAesPrivateKey()
+    {
+        return aes.Key;
+    }
+
+    public byte[] ExportAesIv()
+    {
+        return aes.IV;
     }
 }

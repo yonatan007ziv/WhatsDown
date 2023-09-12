@@ -2,11 +2,15 @@
 
 public interface IEncryptionHandler
 {
-    void ImportRsa(byte[] rsaPublicKey);
-    byte[] ExportAes();
-
     byte[] EncryptRsa(byte[] buffer);
     byte[] DecryptRsa(byte[] buffer);
     byte[] EncryptAes(byte[] buffer);
     byte[] DecryptAes(byte[] buffer);
+
+    void ImportRsa(byte[] rsaPublicKey);
+    byte[] ExportRsa();
+    void ImportAesPrivateKey(byte[] rsaPublicKey);
+    void ImportAesIv(byte[] rsaPublicKey);
+    byte[] ExportAesPrivateKey();
+    byte[] ExportAesIv();
 }

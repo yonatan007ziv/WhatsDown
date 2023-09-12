@@ -4,7 +4,7 @@ using WhatsDown.WPF.MVVM.ViewModels;
 
 namespace WhatsDown.WPF.MVVM.Shell;
 
-class MainWindowViewModel : ViewModelBase
+class MainWindowViewModel : BaseViewModel
 {
     private INavigationService _navigation;
 
@@ -21,6 +21,16 @@ class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel(INavigationService navigation)
     {
         _navigation = navigation;
-        _navigation.NavigateTo<MainMenuViewModel>();
+        _navigation.NavigateTo<LoginViewModel>();
+    }
+
+    public override void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Exit()
+    {
+        throw new System.NotImplementedException();
     }
 }

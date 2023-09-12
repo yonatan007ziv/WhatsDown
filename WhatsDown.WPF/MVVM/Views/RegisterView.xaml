@@ -6,6 +6,48 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="REGISTER VIEW"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="2" Grid.Row="1"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Create an Account" FontSize="24"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="2"
+                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Text="Email" FontSize="24"/>
+        <TextBox Grid.Column="2" Grid.Row="2"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="3"
+                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Text="Password" FontSize="24"/>
+        <TextBox Grid.Column="2" Grid.Row="3"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="1"
+                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Text="{Binding Result}" Foreground="{Binding ResultColor, Converter={StaticResource ResourceKey=ColorToBrushConverter}}" FontSize="24"/>
+
+        <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Content="I Already Have an Account" FontSize="24" Margin="15" Command="{Binding SwitchToLoginCmd}"/>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Content="Register" FontSize="24" Margin="15" Command="{Binding SubmitRegisterCmd}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

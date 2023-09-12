@@ -4,12 +4,12 @@ using WhatsDown.WPF.Interfaces;
 
 namespace WhatsDown.WPF.Services;
 
-internal class NavigationService : ViewModelBase, INavigationService
+internal class NavigationService : BaseViewModel, INavigationService
 {
-    private readonly Func<Type, ViewModelBase> _viewModelFactory;
-    private ViewModelBase _currentViewModel = null!;
+    private readonly Func<Type, BaseViewModel> viewModelFactory;
+    private BaseViewModel _currentViewModel = null!;
 
-    public ViewModelBase CurrentViewModel
+    public BaseViewModel CurrentViewModel
     {
         get => _currentViewModel;
         set
@@ -19,13 +19,25 @@ internal class NavigationService : ViewModelBase, INavigationService
         }
     }
 
-    public NavigationService(Func<Type, ViewModelBase> viewModelFactory)
+    public NavigationService(Func<Type, BaseViewModel> viewModelFactory)
     {
-        this._viewModelFactory = viewModelFactory;
+        this.viewModelFactory = viewModelFactory;
     }
 
-    public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
+    public void NavigateTo<TViewModel>() where TViewModel : BaseViewModel
     {
-        CurrentViewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+        CurrentViewModel?.Exit();
+        CurrentViewModel = viewModelFactory.Invoke(typeof(TViewModel));
+        CurrentViewModel.Enter();
+    }
+
+    public override void Enter()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Exit()
+    {
+        throw new NotImplementedException();
     }
 }

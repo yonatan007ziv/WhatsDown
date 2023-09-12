@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Net.Sockets;
-using WhatsDown.Server.Interfaces.Client;
-using WhatsDown.Server.Interfaces.Services;
+using WhatsDown.Core.Exceptions;
+using WhatsDown.Core.Interfaces;
+using WhatsDown.Core.Interfaces.Networking;
 using WhatsDown.Server.Networking.Clients.Tcp;
 
 namespace WhatsDown.Server.Handlers;
 
-internal class ClientCommunicationHandler
+internal class ClientCommunicationHandler : INetworkCommunication
 {
     private readonly ILogger logger;
 
@@ -15,28 +16,41 @@ internal class ClientCommunicationHandler
     public ClientCommunicationHandler(TcpClient socket)
     {
         logger = ServiceLocator.ServiceProvider.GetRequiredService<ILogger>();
-        client = new TcpClientHandler(socket);
+        client = new TcpServerCommunicationHandler(socket);
+
+        ReadMessageLoop();
     }
 
-    public async void HandleClient()
+    public async Task WriteMessage(string msg)
     {
-        try
+        await client.WriteMessage(msg);
+    }
+
+    public async Task<string> ReadMessage()
+    {
+        return await client.ReadMessage();
+    }
+
+    private async void ReadMessageLoop()
+    {
+        while (true)
         {
-            await client.Handle();
-        }
-        catch (Exception ex)
-        {
-            client.Terminate();
-            logger.LogError($"Client Exception: {ex.Message}");
+            try
+            {
+                string msg = await ReadMessage();
+                InterpretMessage(msg);
+            }
+            catch (DisconnectedFromEndPointException)
+            {
+                logger.LogError("Client Disconnected");
+                break;
+            }
         }
     }
 
-    public async void Read()
+    private void InterpretMessage(string msg)
     {
-        string msg = await client.ReadMessage();
-    }
-    public void Write(string msg)
-    {
-        client.WriteMessage(msg);
+        logger.LogSuccess($"GOT MESSAGE! {msg}");
+        WriteMessage("NIGGA");
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using WhatsDown.Core.Interfaces;
 using WhatsDown.Server.Exceptions;
 using WhatsDown.Server.Interfaces.Services;
 
 namespace WhatsDown.Server.Services;
 
-internal class SmtpService : IEmailSender
+internal class SmtpService : IEmailSendingService
 {
     private readonly SmtpClient smtpClient = null!;
     private readonly MailMessage message = null!;

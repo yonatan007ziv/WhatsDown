@@ -1,10 +1,19 @@
 ﻿using System.Runtime.CompilerServices;
-using WhatsDown.Server.Interfaces.Services;
+using WhatsDown.Core.Interfaces;
 
 namespace WhatsDown.Server.Services;
 
 class ConsoleLogger : ILogger
 {
+    private readonly object lockObj = new object();
+
+    public void LogSuccess(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0)
+    {
+        origin = Path.GetFileNameWithoutExtension(origin);
+        LogPrefix(LogLevel.Success, origin, lineNumber);
+        Console.WriteLine(message);
+    }
+
     public void LogTrace(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0)
     {
         origin = Path.GetFileNameWithoutExtension(origin);
@@ -42,30 +51,38 @@ class ConsoleLogger : ILogger
 
     private void LogPrefix(LogLevel level, string origin, int lineNumber)
     {
-        ConsoleColor originalColor = Console.ForegroundColor;
-        ConsoleColor prefixColor;
-        switch (level)
+        lock (lockObj)
         {
-            default:
-            case LogLevel.Trace:
-                prefixColor = ConsoleColor.White;
-                break;
-            case LogLevel.Information:
-                prefixColor = ConsoleColor.Cyan;
-                break;
-            case LogLevel.Warning:
-                prefixColor = ConsoleColor.Yellow;
-                break;
-            case LogLevel.Error:
-                prefixColor = ConsoleColor.Red;
-                break;
-            case LogLevel.Fatal:
-                prefixColor = ConsoleColor.DarkRed;
-                break;
-        }
+            ConsoleColor originalColor = Console.ForegroundColor;
+            ConsoleColor prefixColor;
+            switch (level)
+            {
+                default:
+                    prefixColor = ConsoleColor.White;
+                    break;
+                case LogLevel.Success:
+                    prefixColor = ConsoleColor.Green;
+                    break;
+                case LogLevel.Trace:
+                    prefixColor = ConsoleColor.White;
+                    break;
+                case LogLevel.Information:
+                    prefixColor = ConsoleColor.Cyan;
+                    break;
+                case LogLevel.Warning:
+                    prefixColor = ConsoleColor.Yellow;
+                    break;
+                case LogLevel.Error:
+                    prefixColor = ConsoleColor.Red;
+                    break;
+                case LogLevel.Fatal:
+                    prefixColor = ConsoleColor.DarkRed;
+                    break;
+            }
 
-        Console.ForegroundColor = prefixColor;
-        Console.Write("{0} [class: {1}, line: {2}] - ", level.ToString(), origin, lineNumber);
-        Console.ForegroundColor = originalColor;
+            Console.ForegroundColor = prefixColor;
+            Console.Write("{0} [class: {1}, line: {2}] - ", level.ToString(), origin, lineNumber);
+            Console.ForegroundColor = originalColor;
+        }
     }
 }

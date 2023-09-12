@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using WhatsDown.Server.Interfaces.Services;
+using WhatsDown.Core.Interfaces;
 
 namespace WhatsDown.Server;
 

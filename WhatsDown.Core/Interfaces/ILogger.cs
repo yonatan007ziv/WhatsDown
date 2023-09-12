@@ -1,9 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace WhatsDown.Server.Interfaces.Services;
+namespace WhatsDown.Core.Interfaces;
 
-internal interface ILogger
+public interface ILogger
 {
+    void LogSuccess(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0);
     void LogTrace(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0);
     void LogInformation(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0);
     void LogWarning(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0);
@@ -11,8 +12,9 @@ internal interface ILogger
     void LogFatal(string message, [CallerFilePath] string origin = "", [CallerLineNumber] int lineNumber = 0);
 }
 
-internal enum LogLevel
+public enum LogLevel
 {
+    Success,
     Trace,
     Information,
     Warning,
