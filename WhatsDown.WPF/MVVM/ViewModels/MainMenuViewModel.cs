@@ -1,6 +1,4 @@
-﻿using System.Net;
-using WhatsDown.WPF.Core;
-using WhatsDown.WPF.Handlers;
+﻿using WhatsDown.WPF.MVVM.MVVMCore;
 
 namespace WhatsDown.WPF.MVVM.ViewModels;
 

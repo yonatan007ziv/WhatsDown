@@ -1,4 +1,4 @@
-﻿using WhatsDown.WPF.Core;
+﻿using WhatsDown.WPF.MVVM.MVVMCore;
 
 namespace WhatsDown.WPF.Interfaces;
 

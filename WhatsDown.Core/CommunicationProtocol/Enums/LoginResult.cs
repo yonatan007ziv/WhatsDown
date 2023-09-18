@@ -3,9 +3,10 @@
 public enum LoginResult
 {
     Success,
-    NoSuchEmail,
+    NoSuchEmailExists,
     InvalidEmail,
     WrongPassword,
     InvalidPassword,
-    ServerUnreachable
+    ServerUnreachable,
+    UnknownError,
 }

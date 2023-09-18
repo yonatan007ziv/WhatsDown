@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WhatsDown.WPF": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}

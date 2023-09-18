@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WhatsDown.Core.Interfaces;
-using WhatsDown.Server.Interfaces.Services;
+using WhatsDown.Server.Database.Models;
 
 namespace WhatsDown.Server.Database.Context;
 
-internal class WhatsDownDbContext : DbContext
+public class WhatsDownDbContext : DbContext
 {
-    private readonly ILogger logger;
-    private readonly IConfigurationService configuration;
+    #region Table definitions
+    public DbSet<AccountCredentials> AccountCredentials { get; set; }
+    public DbSet<UserInformation> UserInformation { get; set; }
+    #endregion
 
-    public WhatsDownDbContext(ILogger logger, IConfigurationService configuration)
-    {
-        this.logger = logger;
-        this.configuration = configuration;
-    }
+    public WhatsDownDbContext(DbContextOptions<WhatsDownDbContext> options)
+        : base(options)
+    { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(configuration.GetStringAttribute("ConnectionStrings:SqlDb"));
+        optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WhatsDownDB;Integrated Security=True;");
+        base.OnConfiguring(optionsBuilder);
     }
 }

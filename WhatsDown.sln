@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsDown.Core", "WhatsDown.Core\WhatsDown.Core.csproj", "{FC189BE3-C917-4CF7-92AF-0D77CC64AC6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsDown.Core", "WhatsDown.Core\WhatsDown.Core.csproj", "{FC189BE3-C917-4CF7-92AF-0D77CC64AC6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsDown.WPF", "WhatsDown.WPF\WhatsDown.WPF.csproj", "{38679546-03D9-4AAC-82AA-0EFDADBA7B47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsDown.WPF", "WhatsDown.WPF\WhatsDown.WPF.csproj", "{38679546-03D9-4AAC-82AA-0EFDADBA7B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsDown.ASP", "WhatsDown.ASP\WhatsDown.ASP.csproj", "{44B1E38F-430A-435D-AE19-2260464D2386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsDown.ASP", "WhatsDown.ASP\WhatsDown.ASP.csproj", "{44B1E38F-430A-435D-AE19-2260464D2386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsDown.Server", "WhatsDown.Server\WhatsDown.Server.csproj", "{860CE076-6BA4-473C-B723-A44E1EF06C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsDown.Server", "WhatsDown.Server\WhatsDown.Server.csproj", "{860CE076-6BA4-473C-B723-A44E1EF06C8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsDown.UnitTests", "WhatsDown.UnitTests\WhatsDown.UnitTests.csproj", "{E08275DB-95B3-4E40-9CEA-01BFCC8EAA0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{860CE076-6BA4-473C-B723-A44E1EF06C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{860CE076-6BA4-473C-B723-A44E1EF06C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{860CE076-6BA4-473C-B723-A44E1EF06C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08275DB-95B3-4E40-9CEA-01BFCC8EAA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08275DB-95B3-4E40-9CEA-01BFCC8EAA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08275DB-95B3-4E40-9CEA-01BFCC8EAA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08275DB-95B3-4E40-9CEA-01BFCC8EAA0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

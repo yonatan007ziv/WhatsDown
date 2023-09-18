@@ -1,8 +1,9 @@
-﻿using WhatsDown.Core.Interfaces.Networking;
+﻿using System;
+using WhatsDown.Core.Interfaces.Networking;
 
 namespace WhatsDown.WPF.Interfaces;
 
-interface INetworkClient : INetworkCommunication, IConnectionManager
+interface INetworkClient : INetworkCommunication, IConnectionManager, IDisposable
 {
-    void Dispose();
+
 }

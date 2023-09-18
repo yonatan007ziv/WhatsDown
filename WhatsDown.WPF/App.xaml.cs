@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
-using WhatsDown.WPF.Core;
-using WhatsDown.WPF.Interfaces;
-using WhatsDown.WPF.MVVM.Shell;
-using WhatsDown.WPF.MVVM.ViewModels;
-using WhatsDown.WPF.Services;
+using WhatsDown.WPF.MVVM.MVVMCore.Shell;
 
 namespace WhatsDown.WPF;
 

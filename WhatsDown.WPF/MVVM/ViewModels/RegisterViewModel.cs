@@ -2,16 +2,16 @@
 using System.Windows.Media;
 using WhatsDown.Core.CommunicationProtocol.Enums;
 using WhatsDown.Core.Interfaces;
-using WhatsDown.WPF.Core;
-using WhatsDown.WPF.Handlers.Networking;
 using WhatsDown.WPF.Interfaces;
+using WhatsDown.WPF.Interfaces.RequestResponse;
 using WhatsDown.WPF.MVVM.Models;
+using WhatsDown.WPF.MVVM.MVVMCore;
 
 namespace WhatsDown.WPF.MVVM.ViewModels;
 
 class RegisterViewModel : BaseViewModel, IResultCommunicator<RegisterResult>
 {
-    private readonly ILogger logger;
+    private readonly IRegisterRequestResponseHandler registerHandler;
     private readonly INavigationService navigation;
     private readonly RegisterModel model = new RegisterModel();
 
@@ -72,9 +72,9 @@ class RegisterViewModel : BaseViewModel, IResultCommunicator<RegisterResult>
         }
     }
 
-    public RegisterViewModel(ILogger logger, INavigationService navigation)
+    public RegisterViewModel(IRegisterRequestResponseHandler registerHandler, INavigationService navigation)
     {
-        this.logger = logger;
+        this.registerHandler = registerHandler;
         this.navigation = navigation;
 
         SwitchToLoginCmd = new RelayCommand(SwitchToLogin, obj => true);
@@ -104,7 +104,8 @@ class RegisterViewModel : BaseViewModel, IResultCommunicator<RegisterResult>
 
     private async void SubmitRegister()
     {
-        await new RegisterRequestPostHandler(logger, this, model).InitiateRegisterRequest();
+        RegisterResult result = await registerHandler.RegisterProcedure(model);
+        SetResult(result);
     }
 
     public void SetResult(RegisterResult result)

@@ -1,8 +1,8 @@
-﻿using WhatsDown.Server.Interfaces.Services;
+﻿using WhatsDown.Server.Interfaces.Services.Security;
 
 namespace WhatsDown.Server.Services.Hashing;
 
-internal class MD5HashingService : IHashingService
+internal class MD5HashingService : IHasher
 {
-    
+
 }

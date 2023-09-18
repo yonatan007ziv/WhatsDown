@@ -3,8 +3,8 @@
 public class EncryptionFailedException : Exception
 {
     public EncryptionFailedException()
-        :base("End-to-End Encryption Failed")
+        : base("End-to-End Encryption Failed")
     {
-        
+
     }
 }

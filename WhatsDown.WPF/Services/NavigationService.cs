@@ -1,6 +1,6 @@
 ﻿using System;
-using WhatsDown.WPF.Core;
 using WhatsDown.WPF.Interfaces;
+using WhatsDown.WPF.MVVM.MVVMCore;
 
 namespace WhatsDown.WPF.Services;
 

@@ -6,7 +6,7 @@ using WhatsDown.Server.Interfaces.Services;
 
 namespace WhatsDown.Server.Services;
 
-internal class SmtpService : IEmailSendingService
+internal class SmtpService : IEmailSender
 {
     private readonly SmtpClient smtpClient = null!;
     private readonly MailMessage message = null!;
@@ -15,7 +15,7 @@ internal class SmtpService : IEmailSendingService
     private readonly int port;
     private readonly ILogger logger;
 
-    public SmtpService(IConfigurationService configuration, ILogger logger)
+    public SmtpService(IConfigurationFetcher configuration, ILogger logger)
     {
         try
         {
@@ -26,7 +26,7 @@ internal class SmtpService : IEmailSendingService
             smtpPassword = configuration.GetStringAttribute("Smtp:Password");
             port = configuration.GetIntAttribute("Smtp:Port");
         }
-        catch (ConfigurationAttributeNotFound ex) 
+        catch (ConfigurationAttributeNotFound ex)
         {
             logger.LogError($"Error Initializing SmtpService: {ex.Message}");
             throw new ServiceInitializationException(nameof(SmtpService));

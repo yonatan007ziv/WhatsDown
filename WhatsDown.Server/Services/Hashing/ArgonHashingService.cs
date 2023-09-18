@@ -1,6 +1,8 @@
-﻿namespace WhatsDown.Server.Services.Hashing;
+﻿using WhatsDown.Server.Interfaces.Services.Security;
 
-internal class ArgonHashingService
+namespace WhatsDown.Server.Services.Hashing;
+
+internal class ArgonHashingService : IHasher
 {
-    
+
 }

@@ -6,5 +6,6 @@ public enum RegisterResult
     EmailExists,
     InvalidEmail,
     InvalidPassword,
-    ServerUnreachable
+    ServerUnreachable,
+    UnknownError
 }

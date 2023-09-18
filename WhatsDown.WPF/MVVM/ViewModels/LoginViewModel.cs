@@ -1,18 +1,17 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
 using WhatsDown.Core.CommunicationProtocol.Enums;
-using WhatsDown.Core.Interfaces;
-using WhatsDown.WPF.Core;
-using WhatsDown.WPF.Handlers.Networking;
 using WhatsDown.WPF.Interfaces;
+using WhatsDown.WPF.Interfaces.RequestResponse;
 using WhatsDown.WPF.MVVM.Models;
+using WhatsDown.WPF.MVVM.MVVMCore;
 
 namespace WhatsDown.WPF.MVVM.ViewModels;
 
 class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
 {
-    private readonly ILogger logger;
     private readonly INavigationService navigation;
+    private readonly ILoginRequestResponseHandler loginHandler;
     private readonly LoginModel model = new LoginModel();
 
     public string Email
@@ -72,10 +71,10 @@ class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
         }
     }
 
-    public LoginViewModel(ILogger logger, INavigationService navigation)
+    public LoginViewModel(INavigationService navigation, ILoginRequestResponseHandler loginHandler)
     {
-        this.logger = logger;
         this.navigation = navigation;
+        this.loginHandler = loginHandler;
 
         SwitchToRegisterCmd = new RelayCommand(SwitchToRegister, obj => true);
         SubmitLoginCmd = new RelayCommand(obj => SubmitLogin(), obj => CanSubmitLoginLogic());
@@ -83,7 +82,7 @@ class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
 
     public override void Enter()
     {
-        
+
     }
 
     public override void Exit()
@@ -104,7 +103,8 @@ class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
 
     private async void SubmitLogin()
     {
-        await new LoginRequestPostHandler(logger, this, model).InitiateLoginRequest();
+        LoginResult result = await loginHandler.LoginProcedure(model);
+        SetResult(result);
     }
 
     public void SetResult(LoginResult result)
@@ -115,7 +115,7 @@ class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
                 Result = "Sucessfully Logged in";
                 ResultColor = Colors.Green;
                 break;
-            case LoginResult.NoSuchEmail:
+            case LoginResult.NoSuchEmailExists:
                 Result = "No Such Email Found";
                 ResultColor = Colors.Yellow;
                 break;
@@ -133,6 +133,10 @@ class LoginViewModel : BaseViewModel, IResultCommunicator<LoginResult>
                 break;
             case LoginResult.ServerUnreachable:
                 Result = "Server Unreachable";
+                ResultColor = Colors.DarkRed;
+                break;
+            case LoginResult.UnknownError:
+                Result = "Unknown Error";
                 ResultColor = Colors.DarkRed;
                 break;
         }
