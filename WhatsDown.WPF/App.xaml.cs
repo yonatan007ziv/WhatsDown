@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
+using WhatsDown.WPF.DI.Configuration;
+using WhatsDown.WPF.Interfaces.AppConfiguration;
 using WhatsDown.WPF.MVVM.MVVMCore.Shell;
 
 namespace WhatsDown.WPF;
@@ -14,10 +16,12 @@ public partial class App : Application
 
     public App()
     {
+
         IServiceCollection services = new ServiceCollection();
 
         new ServiceRegistration(services).AddServices();
         _serviceProvider = services.BuildServiceProvider();
+        _serviceProvider.GetRequiredService<ISettingsManager>(); // temp, need to somehow initialize ISettingsManager if not used as a service directly
     }
 
     protected override void OnStartup(StartupEventArgs e)

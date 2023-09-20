@@ -1,12 +1,13 @@
-﻿using WhatsDown.Server.Exceptions;
+﻿using Microsoft.Extensions.Configuration;
+using WhatsDown.Server.Exceptions;
 
 namespace WhatsDown.Server.Services;
 
 internal class ConfigurationFetcherService : Interfaces.Services.IConfigurationFetcher
 {
-    private readonly Microsoft.Extensions.Configuration.IConfiguration config;
+    private readonly IConfiguration config;
 
-    public ConfigurationFetcherService(Microsoft.Extensions.Configuration.IConfiguration config)
+    public ConfigurationFetcherService(IConfiguration config)
     {
         this.config = config;
     }

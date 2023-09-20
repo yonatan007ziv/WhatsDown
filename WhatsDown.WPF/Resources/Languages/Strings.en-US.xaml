@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=mscorlib">
+	<!-- English/US -->
+	
+	<!--#region Login Register Responses -->
+
+	<!-- Login Result Strings -->
+	<system:String x:Key="Result_Login_UnknownError_Message">Unknown Error Occured</system:String>
+	<system:String x:Key="Result_Login_Success_Message">Sucessfully Logged In</system:String>
+	<system:String x:Key="Result_Login_NoSuchEmailExists_Message">No Such Email Address Found</system:String>
+	<system:String x:Key="Result_Login_InvalidEmail_Message">Invalid Email Address Entered</system:String>
+	<system:String x:Key="Result_Login_WrongPassword_Message">Wrong Password Entered</system:String>
+	<system:String x:Key="Result_Login_InvalidPassword_Message">Invalid Password Entered</system:String>
+	<system:String x:Key="Result_Login_InvalidCredentials_Message">Invalid Credentials Entered</system:String>
+	<system:String x:Key="Result_Login_ServerUnreachable_Message">Remote Server Unreachable</system:String>
+	<system:String x:Key="Result_Login_Timeout_Message">Request Timedout</system:String>
+
+	<!-- Login Result Colors -->
+	<Color x:Key="Result_Login_UnknownError_Color">DarkRed</Color>
+	<Color x:Key="Result_Login_Success_Color">Green</Color>
+	<Color x:Key="Result_Login_NoSuchEmailExists_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidEmail_Color">Yellow</Color>
+	<Color x:Key="Result_Login_WrongPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidCredentials_Color">Yellow</Color>
+	<Color x:Key="Result_Login_ServerUnreachable_Color">DarkRed</Color>
+	<Color x:Key="Result_Login_Timeout_Color">DarkRed</Color>
+
+	<!-- Register Result Strings -->
+	<system:String x:Key="Result_Register_UnknownError_Message">Unknown Error Occurred</system:String>
+	<system:String x:Key="Result_Register_Success_Message">Successfully Registered</system:String>
+	<system:String x:Key="Result_Register_EmailExists_Message">Email Address Already Exists</system:String>
+	<system:String x:Key="Result_Register_InvalidEmail_Message">Invalid Email Address Entered</system:String>
+	<system:String x:Key="Result_Register_InvalidPassword_Message">Invalid Password Entered</system:String>
+	<system:String x:Key="Result_Register_InvalidCredentials_Message">Invalid Credentials Entered</system:String>
+	<system:String x:Key="Result_Register_ServerUnreachable_Message">Remote Server Unreachable</system:String>
+	<system:String x:Key="Result_Register_Timeout_Message">Request Timed Out</system:String>
+
+	<!-- Register Result Colors -->
+	<Color x:Key="Result_Register_UnknownError_Color">DarkRed</Color>
+	<Color x:Key="Result_Register_Success_Color">Green</Color>
+	<Color x:Key="Result_Register_EmailExists_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidEmail_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidCredentials_Color">Yellow</Color>
+	<Color x:Key="Result_Register_ServerUnreachable_Color">DarkRed</Color>
+	<Color x:Key="Result_Register_Timeout_Color">DarkRed</Color>
+
+	<!--#endregion-->
+	
+</ResourceDictionary>

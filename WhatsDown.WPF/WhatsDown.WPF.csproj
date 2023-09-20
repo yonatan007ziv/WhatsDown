@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<ApplicationIcon>WhatsDown.ico</ApplicationIcon>
+		<ApplicationIcon>Resources\WhatsDown.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -13,10 +13,19 @@
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<OutputType>WinExe</OutputType>
 	</PropertyGroup>
-
-
+	
 	<ItemGroup>
-		<Content Include="WhatsDown.ico" />
+	  <Page Remove="Resources\Languages\Strings.en-US.xaml" />
+	  <Page Remove="Resources\Languages\Strings.he-IL.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Resources\Languages\Strings.en-US.xaml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\Languages\Strings.he-IL.xaml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\WhatsDown.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,11 +35,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\WhatsDown.Core\WhatsDown.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Core\" />
-	  <Folder Include="Exceptions\" />
 	</ItemGroup>
 
 </Project>

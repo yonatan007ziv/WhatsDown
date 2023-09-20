@@ -2,11 +2,13 @@
 
 public enum LoginResult
 {
+    UnknownError, // Default
     Success,
     NoSuchEmailExists,
     InvalidEmail,
     WrongPassword,
     InvalidPassword,
+    InvalidCredentials,
     ServerUnreachable,
-    UnknownError,
+    Timeout,
 }

@@ -2,10 +2,12 @@
 
 public enum RegisterResult
 {
+    UnknownError, // Default
     Success,
     EmailExists,
     InvalidEmail,
     InvalidPassword,
+    InvalidCredentials,
     ServerUnreachable,
-    UnknownError
+    Timeout,
 }

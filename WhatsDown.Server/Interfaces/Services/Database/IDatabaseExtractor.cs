@@ -1,10 +1,9 @@
-﻿using System.Data;
-using System.Linq.Expressions;
+﻿namespace WhatsDown.Server.Interfaces.Services.Database;
 
-namespace WhatsDown.Server.Interfaces.Services.Database;
-
-public interface IDatabaseExtractor
+// Revise as needed
+internal interface IDatabaseExtractor
 {
-    bool TableExists(string tableName);
-    IEnumerator<DataRow> GetRows(string tableName, Expression<Func<object, bool>> expression);
+	Task<IEnumerable<object>> GetRowsAsync(string query, params object[] parameters);
+	Task<object> ExecuteScalarAsync(string query, params object[] parameters);
+	Task<int> ExecuteNonQueryAsync(string query, params object[] parameters);
 }

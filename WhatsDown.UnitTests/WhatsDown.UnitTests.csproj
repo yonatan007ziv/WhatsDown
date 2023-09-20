@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WhatsDown.Core\WhatsDown.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace WhatsDown.Server.Services.Hashing;
 
-internal class MD5HashingService : IHasher
+internal class Md5HashingService : IHasher
 {
 
 }

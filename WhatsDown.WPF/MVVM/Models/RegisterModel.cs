@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace WhatsDown.WPF.MVVM.Models;
 
-class RegisterModel
+public class RegisterModel
 {
     public string Email { get; set; } = "";
     public string Password { get; set; } = "";
@@ -11,4 +11,5 @@ class RegisterModel
     public Color ResultColor { get; set; } = Colors.Black;
     public ICommand SwitchToLoginCmd { get; set; } = null!;
     public ICommand SubmitRegisterCmd { get; set; } = null!;
+    public int TimeoutPercentage { get; set; }
 }

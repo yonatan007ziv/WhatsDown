@@ -1,7 +1,7 @@
 ﻿<Application x:Class="WhatsDown.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:WhatsDown.WPF.Converters"
+             xmlns:converters="clr-namespace:WhatsDown.WPF.Utils.WPFConverters"
              xmlns:viewModels="clr-namespace:WhatsDown.WPF.MVVM.ViewModels"
              xmlns:views="clr-namespace:WhatsDown.WPF.MVVM.Views">
     <Application.Resources>

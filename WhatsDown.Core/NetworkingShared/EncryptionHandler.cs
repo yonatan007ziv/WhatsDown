@@ -16,32 +16,56 @@ public class EncryptionHandler : IEncryptionHandler
 
     public byte[] EncryptAes(byte[] buffer)
     {
-        return aes.CreateEncryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        try
+        {
+            return aes.CreateEncryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public byte[] EncryptRsa(byte[] buffer)
     {
-        return rsa.Encrypt(buffer, RSAEncryptionPadding.OaepSHA256);
+        try
+        {
+            return rsa.Encrypt(buffer, RSAEncryptionPadding.OaepSHA256);
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public byte[] DecryptAes(byte[] buffer)
     {
-        return aes.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        try
+        {
+            return aes.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length);
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public byte[] DecryptRsa(byte[] buffer)
     {
-        return rsa.Decrypt(buffer, RSAEncryptionPadding.OaepSHA256);
+        try
+        {
+            return rsa.Decrypt(buffer, RSAEncryptionPadding.OaepSHA256);
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public void ImportRsa(byte[] rsaPublicKey)
     {
-        rsa.ImportRSAPublicKey(rsaPublicKey, out _);
+        try
+        {
+            rsa.ImportRSAPublicKey(rsaPublicKey, out _);
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public byte[] ExportRsa()
     {
-        return rsa.ExportRSAPublicKey();
+        try
+        {
+            return rsa.ExportRSAPublicKey();
+        }
+        catch { throw new CryptographicException(); }
     }
 
     public void ImportAesPrivateKey(byte[] aesPrivateKey)

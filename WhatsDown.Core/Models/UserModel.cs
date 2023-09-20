@@ -2,6 +2,8 @@
 
 public class UserModel
 {
-    public int UserId { get; set; }
-    public int Username { get; set; }
+    public int DisplayName { get; set; }
+    public int Description { get; set; }
+    public DateTime CreatedTimestamp { get; set; }
+    public string ProfileImageUrl { get; set; } = null!;
 }

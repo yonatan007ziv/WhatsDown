@@ -1,6 +1,6 @@
 ﻿namespace WhatsDown.Server.Interfaces.Services.Factories;
 
-internal interface IClientCommunicationFactory<TTransportType>
+internal interface IFactory<TParam, TResult>
 {
-    IClientHandler CreateClient(TTransportType socket);
+    TResult Create(TParam param);
 }

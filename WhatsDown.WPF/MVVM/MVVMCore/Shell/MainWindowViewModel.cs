@@ -6,9 +6,9 @@ namespace WhatsDown.WPF.MVVM.MVVMCore.Shell;
 
 class MainWindowViewModel : BaseViewModel
 {
-    private INavigationService _navigation;
+    private INavigationController _navigation;
 
-    public INavigationService Navigation
+    public INavigationController Navigation
     {
         get => _navigation;
         set
@@ -18,7 +18,7 @@ class MainWindowViewModel : BaseViewModel
         }
     }
 
-    public MainWindowViewModel(INavigationService navigation, ILogger logger)
+    public MainWindowViewModel(INavigationController navigation, ILogger logger)
     {
         _navigation = navigation;
         _navigation.NavigateTo<LoginViewModel>();

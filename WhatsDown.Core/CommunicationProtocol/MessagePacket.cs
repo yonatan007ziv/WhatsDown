@@ -5,24 +5,31 @@ namespace WhatsDown.Core.CommunicationProtocol;
 
 public class MessagePacket
 {
-    public CommunicationPurpose Type { get; set; }
-    public string[] Param { get; set; }
+    public CommunicationValid Result { get; set; } = CommunicationValid.Yes;
+    public CommunicationType Type { get; set; }
+    public string[] Params { get; set; } = Array.Empty<string>();
 
-    public MessagePacket(CommunicationPurpose type, params string[] param)
+    public MessagePacket() { } // Used For JSON Deserialization
+
+    public MessagePacket(CommunicationType _type, params object[] parameters)
     {
-        Type = type;
-        Param = param;
+        Type = _type;
+		Params = parameters.Select(e => e.ToString()!).ToArray();
     }
 
-    public TEnum ExtractParam<TEnum>(int i) where TEnum : struct
+    public T ExtractParamAsEnum<T>(int i) where T : struct
     {
-        return Enum.Parse<TEnum>(Param[i]);
+        try
+        {
+            return Enum.Parse<T>(Params[i]);
+        }
+        catch { return default; }
     }
 
     public override string ToString()
     {
         StringBuilder stringBuilder = new StringBuilder($"{Type}:");
-        foreach (string s in Param)
+        foreach (string s in Params)
             stringBuilder.Append($"{s}, ");
         return stringBuilder.ToString();
     }

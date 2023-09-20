@@ -2,11 +2,16 @@
 
 public class MessageModel
 {
-    public int MessageId { get; set; }
-    public int ChatId { get; set; }
-    public int SenderId { get; set; }
+    public string DisplayName { get; set; } = null!;
     public string Content { get; set; } = null!;
+    public long FileSize { get; set; }
     public DateTime Timestamp { get; set; }
-    public bool IsRead { get; set; }
-    public MessageContent MessageContent { get; set; }
+    public MessageType MessageType { get; set; }
+}
+
+public enum MessageType
+{
+    Text,
+    Image,
+    Mp3
 }

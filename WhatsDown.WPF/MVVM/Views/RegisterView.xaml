@@ -49,5 +49,8 @@
             <Button HorizontalAlignment="Right" VerticalAlignment="Center"
                  Content="Register" FontSize="24" Margin="15" Command="{Binding SubmitRegisterCmd}"/>
         </StackPanel>
+
+        <ProgressBar Grid.Column="1" Grid.Row="4"
+            Minimum="0" Maximum="100" Value="{Binding TimeoutPercentage}" />
     </Grid>
 </UserControl>

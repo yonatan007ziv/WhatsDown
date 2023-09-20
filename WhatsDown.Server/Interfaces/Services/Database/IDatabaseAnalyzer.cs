@@ -2,15 +2,17 @@
 
 namespace WhatsDown.Server.Interfaces.Services.Database;
 
+// Revise as needed
 internal interface IDatabaseAnalyzer
 {
-    List<ChatModel> GetUserChats(int userId);
-    List<MessageModel> GetChatMessages(int chatId);
-    bool IsUserInChat(int userId, int chatId);
-    List<UserModel> GetChatParticipants(int chatId);
-    int GetUnreadMessagesCount(int userId, int chatId);
-    void MarkMessagesAsRead(int userId, int chatId);
-    bool IsUserBlocked(int userId, int blockedUserId);
-    List<MessageModel> SearchMessagesInChat(int chatId, string searchTerm);
-    void ReportInappropriateContent(int messageId);
+    Task<CredentialsModel> GetUserCredentials(int userId);
+    Task<IEnumerable<ChatModel>> GetUserChats(int userId);
+    Task<IEnumerable<MessageModel>> GetChatModel(int chatId);
+    Task<bool> IsUserInChat(int userId, int chatId);
+    Task<IEnumerable<UserModel>> GetChatParticipants(int chatId);
+    Task<int> GetUnreadMessagesCount(int userId, int chatId);
+    Task MarkMessagesAsRead(int userId, int chatId);
+    Task<bool> IsUserBlocked(int userId, int blockedUserId);
+    Task<IEnumerable<MessageModel>> SearchMessagesInChat(int chatId, string searchTerm);
+    Task ReportInappropriateContent(int messageId);
 }

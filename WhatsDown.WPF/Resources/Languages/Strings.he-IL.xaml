@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=mscorlib">
+	<!-- Hebrew/IL -->
+	
+	<!--#region Login Register Responses -->
+	
+	<!-- Login Result Strings -->
+	<system:String x:Key="Result_Login_UnknownError_Message">שגיאה לא ידועה התרחשה</system:String>
+	<system:String x:Key="Result_Login_Success_Message">התחברת בהצלחה</system:String>
+	<system:String x:Key="Result_Login_NoSuchEmailExists_Message">לא נמצא כתובת דוא"ל זו</system:String>
+	<system:String x:Key="Result_Login_InvalidEmail_Message">כתובת הדוא"ל שהזנת לא תקפה</system:String>
+	<system:String x:Key="Result_Login_WrongPassword_Message">הסיסמה שהזנת שגויה</system:String>
+	<system:String x:Key="Result_Login_InvalidPassword_Message">הסיסמה שהזנת לא תקפה</system:String>
+	<system:String x:Key="Result_Login_InvalidCredentials_Message">האישורים שהזנת לא תקפים</system:String>
+	<system:String x:Key="Result_Login_ServerUnreachable_Message">לא ניתן להתחבר לשרת</system:String>
+	<system:String x:Key="Result_Login_Timeout_Message">הבקשה פגה</system:String>
+
+	<!-- Login Result Colors -->
+	<Color x:Key="Result_Login_UnknownError_Color">DarkRed</Color>
+	<Color x:Key="Result_Login_Success_Color">Green</Color>
+	<Color x:Key="Result_Login_NoSuchEmailExists_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidEmail_Color">Yellow</Color>
+	<Color x:Key="Result_Login_WrongPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Login_InvalidCredentials_Color">Yellow</Color>
+	<Color x:Key="Result_Login_ServerUnreachable_Color">DarkRed</Color>
+	<Color x:Key="Result_Login_Timeout_Color">DarkRed</Color>
+	
+	<!-- Register Result Strings -->
+	<system:String x:Key="Result_Register_UnknownError_Message">שגיאה לא ידועה התרחשה</system:String>
+	<system:String x:Key="Result_Register_Success_Message">נרשמת בהצלחה</system:String>
+	<system:String x:Key="Result_Register_EmailExists_Message">כתובת הדוא"ל כבר קיימת</system:String>
+	<system:String x:Key="Result_Register_InvalidEmail_Message">כתובת הדוא"ל שהזנת לא תקפה</system:String>
+	<system:String x:Key="Result_Register_InvalidPassword_Message">הסיסמה שהזנת לא תקפה</system:String>
+	<system:String x:Key="Result_Register_InvalidCredentials_Message">האישורים שהזנת לא תקפים</system:String>
+	<system:String x:Key="Result_Register_ServerUnreachable_Message">לא ניתן להתחבר לשרת</system:String>
+	<system:String x:Key="Result_Register_Timeout_Message">הבקשה פגה</system:String>
+
+	<!-- Login Result Colors -->
+	<Color x:Key="Result_Register_UnknownError_Color">DarkRed</Color>
+	<Color x:Key="Result_Register_Success_Color">Green</Color>
+	<Color x:Key="Result_Register_EmailExists_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidEmail_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidPassword_Color">Yellow</Color>
+	<Color x:Key="Result_Register_InvalidCredentials_Color">Yellow</Color>
+	<Color x:Key="Result_Register_ServerUnreachable_Color">DarkRed</Color>
+	<Color x:Key="Result_Register_Timeout_Color">DarkRed</Color>
+
+	<!--#endregion-->
+	
+</ResourceDictionary>

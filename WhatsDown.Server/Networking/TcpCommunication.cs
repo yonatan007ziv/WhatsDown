@@ -1,26 +1,44 @@
 ﻿using System.Net.Sockets;
 using WhatsDown.Core.CommunicationProtocol;
+using WhatsDown.Core.CommunicationProtocol.Enums;
 using WhatsDown.Core.Exceptions;
 using WhatsDown.Core.Interfaces;
 using WhatsDown.Core.Interfaces.Networking;
-using WhatsDown.Core.Interfaces.Networking.Communication;
 using WhatsDown.Core.NetworkingShared;
-using WhatsDown.Core.Services.NetworkingEncoders.StringEncodingConfiguration;
+using WhatsDown.Core.Shared;
 
 namespace WhatsDown.Server.Networking;
 
-internal class TcpCommunication : BaseTcpCommunication, INetworkCommunication
+internal class TcpCommunication : BaseTcpCommunication , INetworkCommunication
 {
     private readonly ILogger logger;
 
-    public TcpCommunication(TcpClient client, IMessageEncoder<MessagePacket> encoder, ILogger logger)
+    public TcpCommunication(TcpClient client, ISerializer<MessagePacket> encoder, ILogger logger)
         : base(client, encoder, logger)
     {
         this.logger = logger;
         _ = InitializeEncryption();
     }
 
-    protected override async Task<bool> EstablishEncryption()
+	public async new Task WriteMessage(MessagePacket msg)
+    {
+        await base.WriteMessage(msg);
+    }
+
+	public async new Task<MessagePacket> ReadMessage()
+    {
+        MessagePacket result;
+        try
+        {
+            result = await base.ReadMessage();
+        }
+		catch (NetworkedReadException) { Disconnect(); return new MessagePacket { Result = CommunicationValid.No }; }
+
+		return result;
+    }
+
+
+	protected override async Task<bool> EstablishEncryption()
     {
         try
         {
@@ -38,14 +56,14 @@ internal class TcpCommunication : BaseTcpCommunication, INetworkCommunication
 
             // Test Encryption: Send
             string msgTest = EncryptionTestWord;
-            byte[] decryptedTest = TextEncodingConfiguration.EncodingScheme.GetBytes(msgTest);
+            byte[] decryptedTest = TextEncoding.EncodingScheme.GetBytes(msgTest);
             byte[] encryptedTest = encryption.EncryptAes(decryptedTest);
             _ = WriteBytes(encryptedTest);
 
             // Test Encryption: Receive
             encryptedTest = await ReadBytes();
             decryptedTest = encryption.DecryptAes(encryptedTest);
-            msgTest = TextEncodingConfiguration.EncodingScheme.GetString(decryptedTest);
+            msgTest = TextEncoding.EncodingScheme.GetString(decryptedTest);
 
             if (msgTest != EncryptionTestWord)
                 throw new EncryptionFailedException();
@@ -59,4 +77,11 @@ internal class TcpCommunication : BaseTcpCommunication, INetworkCommunication
         logger.LogSuccess("Encryption Successful");
         return true;
     }
+
+	public void Disconnect()
+	{
+		client.Close();
+		disconnectedCts.Cancel();
+        timeoutCts.Cancel();
+	}
 }

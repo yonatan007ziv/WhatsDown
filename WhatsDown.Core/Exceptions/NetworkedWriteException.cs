@@ -2,9 +2,21 @@
 
 public class NetworkedWriteException : Exception
 {
-    public NetworkedWriteException()
+	public WriteExceptionType Type { get; }
+
+	public NetworkedWriteException(WriteExceptionType type)
         : base()
     {
+		Type = type;
+	}
+}
 
-    }
+public enum WriteExceptionType
+{
+	SerializationFailed,
+	TextEncodingFailed,
+	EncryptionFailed,
+	IO,
+    OperationCancelled,
+	Disposed,
 }
