@@ -2,17 +2,17 @@
 
 public enum CommunicationType
 {
-    // Token Validation
-    TokenValidationRequest,
+	// Token Validation
+	TokenValidationRequest,
 	TokenValidationResponse,
 
-    // Login Related
-    LoginRequest,
-    LoginResponse,
+	// Login Related
+	LoginRequest,
+	LoginResponse,
 
-    // Register Related
-    RegisterRequest,
-    RegisterResponse,
+	// Register Related
+	RegisterRequest,
+	RegisterResponse,
 
 	ChatsRequest,
 	ChatsResponse,

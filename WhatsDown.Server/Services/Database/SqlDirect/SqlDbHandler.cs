@@ -2,25 +2,24 @@
 using WhatsDown.Core.CommunicationProtocol.Enums;
 using WhatsDown.Core.Interfaces;
 using WhatsDown.Core.Models;
-using WhatsDown.Server.Interfaces.Services;
 using WhatsDown.Server.Interfaces.Services.Database;
 
 namespace WhatsDown.Server.Services.Database.SqlDirect;
 
-internal class SqlDbHandler : IDatabaseHandler
+internal class SqlDbHandler : IDatabaseAnalyzer
 {
-    private readonly ILogger logger;
+	private readonly ILogger logger;
 
-    private readonly SqlConnection conn;
+	private readonly SqlConnection conn;
 
-    public SqlDbHandler(IConfigurationFetcher configFetcher, ILogger logger)
-    {
-        this.logger = logger;
+	public SqlDbHandler(IConfigurationFetcher configFetcher, ILogger logger)
+	{
+		this.logger = logger;
 
 		string connString = configFetcher.GetStringAttribute("Database:Sql:ConnectionStrings:Default");
 		logger.LogInformation($"Started SQL Conn: {connString}");
 		conn = new SqlConnection(connString);
-    }
+	}
 
 	public Task<ChatModel> GetChat(int chatId)
 	{

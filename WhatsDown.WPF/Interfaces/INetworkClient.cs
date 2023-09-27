@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WhatsDown.Core.Interfaces.Networking;
 
 namespace WhatsDown.WPF.Interfaces;
 
-interface INetworkClient : INetworkCommunication, IConnectionManager, IDisposable
+interface INetworkClient : IBaseNetworkCommunication, Core.Interfaces.Networking.INetworkClient
 {
 	public string IntegrityToken { get; set; }
 

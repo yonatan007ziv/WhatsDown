@@ -12,21 +12,20 @@ namespace WhatsDown.WPF;
 /// </summary>
 public partial class App : Application
 {
-    private readonly IServiceProvider _serviceProvider;
+	private readonly IServiceProvider _serviceProvider;
 
-    public App()
-    {
+	public App()
+	{
+		IServiceCollection services = new ServiceCollection();
 
-        IServiceCollection services = new ServiceCollection();
+		new ServiceRegistration(services).AddServices();
+		_serviceProvider = services.BuildServiceProvider();
+		_serviceProvider.GetRequiredService<ISettingsManager>(); // Initializes the App's Configuration
+	}
 
-        new ServiceRegistration(services).AddServices();
-        _serviceProvider = services.BuildServiceProvider();
-        _serviceProvider.GetRequiredService<ISettingsManager>(); // temp, need to somehow initialize ISettingsManager if not used as a service directly
-    }
-
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        _serviceProvider.GetRequiredService<MainWindow>().Show();
-        base.OnStartup(e);
-    }
+	protected override void OnStartup(StartupEventArgs e)
+	{
+		_serviceProvider.GetRequiredService<MainWindow>().Show();
+		base.OnStartup(e);
+	}
 }

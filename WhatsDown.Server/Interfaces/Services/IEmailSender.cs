@@ -2,5 +2,5 @@
 
 internal interface IEmailSender
 {
-    Task<bool> SendMessage(string target, string title, string content);
+	Task<bool> SendMessage(string target, string title, string content);
 }

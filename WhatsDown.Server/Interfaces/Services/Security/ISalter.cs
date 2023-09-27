@@ -2,5 +2,5 @@
 
 internal interface ISalter
 {
-    string GenerateSalt();
+	string GenerateSalt();
 }

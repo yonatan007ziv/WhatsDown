@@ -2,15 +2,15 @@
 
 internal class AppSettingsModel
 {
-    public string Localization { get; set; }
+	public string Localization { get; set; }
 
-    public AppSettingsModel()
-    {
-        Localization = "en-US";
-    }
+	public AppSettingsModel()
+	{
+		Localization = "en-US";
+	}
 
-    public override string ToString()
-    {
-        return $"\nLocalization: {Localization}\n";
-    }
+	public override string ToString()
+	{
+		return $"\nLocalization: {Localization}\n";
+	}
 }

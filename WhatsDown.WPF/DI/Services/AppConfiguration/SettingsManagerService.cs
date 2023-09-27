@@ -11,8 +11,7 @@ internal class SettingsManagerService : ISettingsManager
 {
 	private readonly IApplicationConfigurationFileManager configFileManager;
 	private readonly ILogger logger;
-
-	public AppSettingsModel Configuration { get; set; }
+	private AppSettingsModel configuration;
 
 	public SettingsManagerService(IApplicationConfigurationFileManager configFileManager, ILogger logger)
 	{
@@ -20,7 +19,7 @@ internal class SettingsManagerService : ISettingsManager
 		this.logger = logger;
 
 		configFileManager.ConfigFileChanged += RefreshSettings;
-		Configuration = configFileManager.LoadConfig();
+		configuration = configFileManager.LoadConfig();
 	}
 
 	public string GetCulture()
@@ -30,14 +29,14 @@ internal class SettingsManagerService : ISettingsManager
 
 	public void SetCulture(string cultureName)
 	{
-		Configuration.Localization = cultureName;
-		configFileManager.SaveConfig(Configuration);
+		configuration.Localization = cultureName;
+		configFileManager.SaveConfig(configuration);
 	}
 
 	public void RefreshSettings()
 	{
-		Configuration = configFileManager.LoadConfig();
-		SwitchCulture(Configuration.Localization);
+		configuration = configFileManager.LoadConfig();
+		SwitchCulture(configuration.Localization);
 	}
 
 	private void SwitchCulture(string cultureName)

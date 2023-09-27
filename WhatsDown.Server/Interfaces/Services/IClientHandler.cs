@@ -2,5 +2,5 @@
 
 internal interface IClientHandler
 {
-    Task ReadMessageLoop();
+	void Start();
 }

@@ -2,6 +2,6 @@
 
 interface IViewTransition
 {
-    void Enter();
-    void Exit();
+	void Enter();
+	void Exit();
 }

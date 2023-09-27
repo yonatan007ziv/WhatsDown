@@ -2,5 +2,5 @@
 
 internal interface ITokenGenerator<T>
 {
-    T GenerateUniqueToken();
+	T GenerateUniqueToken();
 }

@@ -2,8 +2,8 @@
 
 internal class ConfigurationFileNotFoundException : Exception
 {
-    public ConfigurationFileNotFoundException() : base("IConfiguration Not Found")
-    {
+	public ConfigurationFileNotFoundException() : base("IConfiguration Not Found")
+	{
 
-    }
+	}
 }

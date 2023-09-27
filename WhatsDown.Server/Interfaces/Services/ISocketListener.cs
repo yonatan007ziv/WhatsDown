@@ -2,5 +2,5 @@
 
 internal interface ISocketListener
 {
-    Task StartListening();
+	Task StartListening();
 }

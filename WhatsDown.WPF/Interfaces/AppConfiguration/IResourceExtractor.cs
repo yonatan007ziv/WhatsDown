@@ -4,6 +4,6 @@ namespace WhatsDown.WPF.Interfaces.AppConfiguration;
 
 internal interface IResourceExtractor
 {
-    string GetString(string resourceKey);
-    Color GetColor(string resourceKey);
+	string GetString(string resourceKey);
+	Color GetColor(string resourceKey);
 }

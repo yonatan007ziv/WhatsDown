@@ -12,7 +12,7 @@ internal class ApplicationConfigurationFileManagerService : IApplicationConfigur
 {
 	private const string FileName = "appconfig.json";
 
-	private readonly ISerializer<AppSettingsModel> configSerializer;
+	private readonly ISerializer serializer;
 	private readonly ILogger logger;
 
 	private readonly FileSystemWatcher configFileWatcher = new FileSystemWatcher();
@@ -33,9 +33,9 @@ internal class ApplicationConfigurationFileManagerService : IApplicationConfigur
 		}
 	}
 
-	public ApplicationConfigurationFileManagerService(ISerializer<AppSettingsModel> configSerializer, ILogger logger)
+	public ApplicationConfigurationFileManagerService(ISerializer serializer, ILogger logger)
 	{
-		this.configSerializer = configSerializer;
+		this.serializer = serializer;
 		this.logger = logger;
 
 		configFileWatcher.Path = Directory.GetCurrentDirectory();
@@ -74,7 +74,7 @@ internal class ApplicationConfigurationFileManagerService : IApplicationConfigur
 	{
 		try
 		{
-			string serializedConfig = configSerializer.Serialize(appSettings)
+			string serializedConfig = serializer.Serialize(appSettings)
 				?? throw new SerializationException(appSettings);
 			controlledOperation = true;
 			File.WriteAllText(FileName, serializedConfig);
@@ -93,7 +93,7 @@ internal class ApplicationConfigurationFileManagerService : IApplicationConfigur
 			{
 				controlledOperation = true;
 				string serializedConfig = File.ReadAllText(FileName);
-				return configSerializer.Deserialize(serializedConfig)
+				return serializer.Deserialize<AppSettingsModel>(serializedConfig)
 					?? throw new DeserializationException(serializedConfig);
 			}
 		}

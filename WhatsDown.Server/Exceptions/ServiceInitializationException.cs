@@ -2,9 +2,9 @@
 
 internal class ServiceInitializationException : Exception
 {
-    public ServiceInitializationException(string serviceName)
-        : base($"{serviceName} Failed To Initialize")
-    {
+	public ServiceInitializationException(string serviceName)
+		: base($"{serviceName} Failed To Initialize")
+	{
 
-    }
+	}
 }

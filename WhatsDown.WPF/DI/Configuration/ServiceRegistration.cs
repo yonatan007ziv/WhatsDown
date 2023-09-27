@@ -1,20 +1,23 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using WhatsDown.Core.CommunicationProtocol;
+using System.IO;
 using WhatsDown.Core.Interfaces;
+using WhatsDown.Core.Models;
 using WhatsDown.Core.Services;
-using WhatsDown.WPF.DI.Services;
 using WhatsDown.WPF.DI.Services.Configuration;
 using WhatsDown.WPF.DI.Services.Logging;
+using WhatsDown.WPF.DI.Services.Navigation;
 using WhatsDown.WPF.DI.Services.RequestResponseServices;
 using WhatsDown.WPF.Interfaces;
 using WhatsDown.WPF.Interfaces.Aliases;
 using WhatsDown.WPF.Interfaces.AppConfiguration;
+using WhatsDown.WPF.Mocking;
 using WhatsDown.WPF.MVVM.MVVMCore;
 using WhatsDown.WPF.MVVM.MVVMCore.Shell;
-using WhatsDown.WPF.MVVM.ViewModels;
+using WhatsDown.WPF.MVVM.ViewModels.Elements;
+using WhatsDown.WPF.MVVM.ViewModels.Pages;
 using WhatsDown.WPF.Networking.Tcp;
-using WhatsDown.WPF.Utils;
 
 namespace WhatsDown.WPF.DI.Configuration;
 
@@ -46,34 +49,66 @@ class ServiceRegistration
 
 	private void RegisterViewModels()
 	{
+		// Pages
 		services.AddSingleton<MainMenuViewModel>();
 		services.AddSingleton<LoginViewModel>();
 		services.AddSingleton<RegisterViewModel>();
-		services.AddSingleton<ChatScrollerViewModel>();
+		services.AddSingleton<ChatsUnifiedViewModel>();
+
+		// Elements
+		services.AddSingleton<ChatButtonViewModel>();
+		services.AddSingleton<ChatExplorerViewModel>();
+		services.AddSingleton<ChatsScrollViewModel>();
+
+		#region Navigation Services
+		// Page Factory
+		services.AddSingleton<Func<Type, BasePageViewModel>>(
+			provider => viewModelType =>
+			(BasePageViewModel)provider.GetRequiredService(viewModelType));
+		services.AddSingleton<IPageNavigation, PageNavigationService>();
+
+		// Chat Explorer Factory
+		services.AddSingleton<Func<ChatModel, ChatExplorerViewModel>>(
+			provider => chatModel =>
+			{
+				ChatExplorerViewModel chatExplorer = provider.GetRequiredService<ChatExplorerViewModel>();
+				chatExplorer.ChatModel = chatModel;
+				return chatExplorer;
+			});
+		services.AddSingleton<IChatNavigation, ChatNavigationService>();
+		#endregion
 	}
 
 	private void RegisterRequiredServices()
 	{
-		// View Model Factory
-		services.AddSingleton<Func<Type, BaseViewModel>>(
-			provider => viewModelType =>
-			(BaseViewModel)provider.GetRequiredService(viewModelType));
+		// Configuration
+		IConfigurationBuilder configBuilder = new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("appsettings.json");
+		IConfiguration configuration = configBuilder.Build();
+		services.AddSingleton(configuration);
+		services.AddSingleton<IConfigurationFetcher, ConfigurationFetcherService>();
 
-		services.AddSingleton<INavigationController, NavigationService>();
 		services.AddSingleton<ILogger, ConsoleLogger>();
-		services.AddScoped<ISerializer<MessagePacket>, JsonMessageSerializerService>();
-		services.AddScoped<IChatUserMessageSerializer, JsonChatUserMessageSerializerService>();
+
+		// Serialization
+		services.AddScoped<ISerializer, JsonSerializerService>();
+		services.AddScoped<IMessageSerializer, MessageSerializerService>();
 
 		// Login Register Requesters
-		services.AddTransient<ILoginRequest, LoginRequestService>();
-		services.AddTransient<IRegisterRequest, RegisterRequestService>();
+		services.AddScoped<ILoginRequest, MockLoginRequestService>();
+		// services.AddTransient<ILoginRequest, LoginRequestService>();
+		services.AddScoped<IRegisterRequest, RegisterRequestService>();
+
+		// Validated User Requests
+		services.AddScoped<IValidatedUserRequest, MockValidatedUserRequestService>();
+		// services.AddScoped<IValidatedUserRequest, ValidatedUserRequestService>();
 
 		// Network Client
 		services.AddSingleton<INetworkClient, TcpCommunication>();
 
 		// Configuration
 		services.AddSingleton<IApplicationConfigurationFileManager, ApplicationConfigurationFileManagerService>();
-		services.AddSingleton<ISerializer<AppSettingsModel>, JsonAppConfigurationSerializerService>();
 
 		// Resource Extractor
 		services.AddSingleton<IResourceExtractor, ResourceExtractorService>();

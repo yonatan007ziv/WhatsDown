@@ -2,9 +2,9 @@
 
 public class EncryptionFailedException : Exception
 {
-    public EncryptionFailedException()
-        : base("End-to-End Encryption Failed")
-    {
+	public EncryptionFailedException()
+		: base("End-to-End Encryption Failed")
+	{
 
-    }
+	}
 }

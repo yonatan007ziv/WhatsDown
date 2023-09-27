@@ -5,8 +5,8 @@ public class NetworkedWriteException : Exception
 	public WriteExceptionType Type { get; }
 
 	public NetworkedWriteException(WriteExceptionType type)
-        : base()
-    {
+		: base()
+	{
 		Type = type;
 	}
 }
@@ -17,6 +17,7 @@ public enum WriteExceptionType
 	TextEncodingFailed,
 	EncryptionFailed,
 	IO,
-    OperationCancelled,
 	Disposed,
+	Timedout,
+	OperationCancelled,
 }

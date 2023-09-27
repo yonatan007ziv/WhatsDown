@@ -2,12 +2,12 @@
 
 public class NetworkedReadException : Exception
 {
-    public ReadExceptionType Type { get; }
-    public NetworkedReadException(ReadExceptionType Type)
-        : base()
-    {
-        this.Type = Type;
-    }
+	public ReadExceptionType Type { get; }
+	public NetworkedReadException(ReadExceptionType Type)
+		: base()
+	{
+		this.Type = Type;
+	}
 }
 
 public enum ReadExceptionType

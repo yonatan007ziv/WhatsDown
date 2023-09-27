@@ -7,7 +7,7 @@ internal class DatabaseAnalyzer // : IDatabaseAnalyzer prevent unnecessary compi
 	private readonly IDatabaseExtractor extractor;
 
 	public DatabaseAnalyzer(IDatabaseExtractor extractor)
-    {
-        this.extractor = extractor;
-    }
+	{
+		this.extractor = extractor;
+	}
 }

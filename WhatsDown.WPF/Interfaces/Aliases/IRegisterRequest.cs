@@ -5,7 +5,7 @@ using WhatsDown.Core.Models;
 namespace WhatsDown.WPF.Interfaces.Aliases;
 
 internal interface IRegisterRequest
-        : IRequestResponseProcedure<CredentialsModel, RegisterResult>
+		: IRequestResponseProcedure<CredentialsModel, RegisterResult>
 {
 
 }

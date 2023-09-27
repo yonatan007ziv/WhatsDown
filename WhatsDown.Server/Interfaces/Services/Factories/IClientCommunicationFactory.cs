@@ -2,5 +2,5 @@
 
 internal interface IFactory<TParam, TResult>
 {
-    TResult Create(TParam param);
+	TResult Create(TParam param);
 }

@@ -2,9 +2,9 @@
 
 internal class InvalidJsonEncoderException : Exception
 {
-    public InvalidJsonEncoderException(string operation)
-        : base($"Invalid Json Operation: {operation}")
-    {
+	public InvalidJsonEncoderException(string operation)
+		: base($"Invalid Json Operation: {operation}")
+	{
 
-    }
+	}
 }

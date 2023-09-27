@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Net.Sockets;
-using WhatsDown.Core.CommunicationProtocol;
 using WhatsDown.Core.Interfaces;
 using WhatsDown.Server.Handlers;
 using WhatsDown.Server.Interfaces.Services;
@@ -26,12 +25,14 @@ internal class ClientHandlerFactory : IFactory<TcpClient, IClientHandler>
 		return new ClientHandler(
 			new TcpCommunication(
 					socket,
-					provider.GetRequiredService<ISerializer<MessagePacket>>(),
+					provider.GetRequiredService<ISerializer>(),
+					provider.GetRequiredService<IConfigurationFetcher>(),
 					logger
 					),
-				provider.GetRequiredService<IDatabaseHandler>(),
+				provider.GetRequiredService<IDatabaseAnalyzer>(),
+				provider.GetRequiredService<IEmailSender>(),
 				provider.GetRequiredService<ITokenGenerator<string>>(),
-				provider.GetRequiredService<IChatUserMessageSerializer>(),
+				provider.GetRequiredService<ISerializer>(),
 				logger);
 	}
 }

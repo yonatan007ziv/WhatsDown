@@ -1,7 +1,7 @@
 ﻿namespace WhatsDown.Core.Interfaces;
 
-public interface ISerializer<TMessage>
+public interface ISerializer
 {
-    string? Serialize(TMessage message);
-    TMessage? Deserialize(string message);
+	string? Serialize<T>(T message) where T : class;
+	T? Deserialize<T>(string message) where T : class;
 }

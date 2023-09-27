@@ -29,7 +29,7 @@
 
 	<!-- Register Result Strings -->
 	<system:String x:Key="Result_Register_UnknownError_Message">Unknown Error Occurred</system:String>
-	<system:String x:Key="Result_Register_Success_Message">Successfully Registered</system:String>
+	<system:String x:Key="Result_Register_TwoFANeeded_Message">2FA Needed</system:String>
 	<system:String x:Key="Result_Register_EmailExists_Message">Email Address Already Exists</system:String>
 	<system:String x:Key="Result_Register_InvalidEmail_Message">Invalid Email Address Entered</system:String>
 	<system:String x:Key="Result_Register_InvalidPassword_Message">Invalid Password Entered</system:String>
@@ -39,7 +39,7 @@
 
 	<!-- Register Result Colors -->
 	<Color x:Key="Result_Register_UnknownError_Color">DarkRed</Color>
-	<Color x:Key="Result_Register_Success_Color">Green</Color>
+	<Color x:Key="Result_Register_TwoFANeeded_Color">Green</Color>
 	<Color x:Key="Result_Register_EmailExists_Color">Yellow</Color>
 	<Color x:Key="Result_Register_InvalidEmail_Color">Yellow</Color>
 	<Color x:Key="Result_Register_InvalidPassword_Color">Yellow</Color>

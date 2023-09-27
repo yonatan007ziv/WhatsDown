@@ -5,7 +5,7 @@ using WhatsDown.Core.Models;
 namespace WhatsDown.WPF.Interfaces.Aliases;
 
 internal interface ILoginRequest
-    : IRequestResponseProcedure<CredentialsModel, LoginResult>
+	: IRequestResponseProcedure<CredentialsModel, LoginResult>
 {
 
 }

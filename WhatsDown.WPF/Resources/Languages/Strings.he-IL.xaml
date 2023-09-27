@@ -7,7 +7,7 @@
 	
 	<!-- Login Result Strings -->
 	<system:String x:Key="Result_Login_UnknownError_Message">שגיאה לא ידועה התרחשה</system:String>
-	<system:String x:Key="Result_Login_Success_Message">התחברת בהצלחה</system:String>
+	<system:String x:Key="Result_Login_TwoFANeeded_Message">אימות דו שלבי נדרש</system:String>
 	<system:String x:Key="Result_Login_NoSuchEmailExists_Message">לא נמצא כתובת דוא"ל זו</system:String>
 	<system:String x:Key="Result_Login_InvalidEmail_Message">כתובת הדוא"ל שהזנת לא תקפה</system:String>
 	<system:String x:Key="Result_Login_WrongPassword_Message">הסיסמה שהזנת שגויה</system:String>
@@ -18,7 +18,7 @@
 
 	<!-- Login Result Colors -->
 	<Color x:Key="Result_Login_UnknownError_Color">DarkRed</Color>
-	<Color x:Key="Result_Login_Success_Color">Green</Color>
+	<Color x:Key="Result_Login_TwoFANeeded_Color">Green</Color>
 	<Color x:Key="Result_Login_NoSuchEmailExists_Color">Yellow</Color>
 	<Color x:Key="Result_Login_InvalidEmail_Color">Yellow</Color>
 	<Color x:Key="Result_Login_WrongPassword_Color">Yellow</Color>

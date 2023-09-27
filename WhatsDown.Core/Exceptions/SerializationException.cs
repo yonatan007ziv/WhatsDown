@@ -2,9 +2,9 @@
 
 public class SerializationException : Exception
 {
-    public SerializationException(object deserialized)
-        :base($"Exception while Serializing: {deserialized}")
-    {
+	public SerializationException(object deserialized)
+		: base($"Exception while Serializing: {deserialized}")
+	{
 
-    }
+	}
 }

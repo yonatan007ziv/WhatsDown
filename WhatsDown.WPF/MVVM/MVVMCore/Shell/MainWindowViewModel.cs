@@ -1,38 +1,98 @@
-﻿using WhatsDown.Core.Interfaces;
+﻿using System.Windows;
+using System.Windows.Input;
 using WhatsDown.WPF.Interfaces;
-using WhatsDown.WPF.MVVM.ViewModels;
+using WhatsDown.WPF.MVVM.ViewModels.Pages;
 
 namespace WhatsDown.WPF.MVVM.MVVMCore.Shell;
 
-class MainWindowViewModel : BaseViewModel
+class MainWindowViewModel : BasePageViewModel
 {
-    private INavigationController _navigation;
+	private readonly MainWindowModel model;
 
-    public INavigationController Navigation
-    {
-        get => _navigation;
-        set
-        {
-            _navigation = value;
-            OnPropertyChanged();
-        }
-    }
+	public IPageNavigation Navigation
+	{
+		get => model.Navigation;
+		set
+		{
+			model.Navigation = value;
+			OnPropertyChanged();
+		}
+	}
+	public ICommand DragWindowCmd
+	{
+		get => model.DragWindowCmd;
+		set
+		{
+			model.DragWindowCmd = value;
+			OnPropertyChanged();
+		}
+	}
+	public ICommand MinimizeCmd
+	{
+		get => model.MinimizeCmd;
+		set
+		{
+			model.MinimizeCmd = value;
+			OnPropertyChanged();
+		}
+	}
+	public ICommand MaximizeCmd
+	{
+		get => model.MaximizeCmd;
+		set
+		{
+			model.MaximizeCmd = value;
+			OnPropertyChanged();
+		}
+	}
+	public ICommand CloseCmd
+	{
+		get => model.CloseCmd;
+		set
+		{
+			model.CloseCmd = value;
+			OnPropertyChanged();
+		}
+	}
 
-    public MainWindowViewModel(INavigationController navigation, ILogger logger)
-    {
-        _navigation = navigation;
-        _navigation.NavigateTo<LoginViewModel>();
+	public MainWindowViewModel(IPageNavigation navigation)
+	{
+		model = new MainWindowModel();
 
-        logger.LogInformation("Started WPF Debug");
-    }
+		Navigation = navigation;
+		DragWindowCmd = new RelayCommand(obj => DragWindow(), obj => true);
+		MinimizeCmd = new RelayCommand(obj => MinimizeWindow(), obj => true);
+		MaximizeCmd = new RelayCommand(obj => MaximizeWindow(), obj => true);
+		CloseCmd = new RelayCommand(obj => CloseWindow(), obj => true);
 
-    public override void Enter()
-    {
-        throw new System.NotImplementedException();
-    }
+		Navigation.NavigateTo<LoginViewModel>();
+	}
 
-    public override void Exit()
-    {
-        throw new System.NotImplementedException();
-    }
+
+	private void DragWindow()
+	{
+		if (Mouse.LeftButton == MouseButtonState.Pressed)
+			Application.Current.MainWindow.DragMove();
+	}
+
+	private void MinimizeWindow()
+	{
+		Application.Current.MainWindow.WindowState = WindowState.Minimized;
+	}
+
+	private bool maximized;
+	private void MaximizeWindow()
+	{
+		Application.Current.MainWindow.WindowState = maximized ? WindowState.Normal : WindowState.Maximized;
+		maximized = !maximized;
+	}
+
+	private void CloseWindow()
+	{
+		Application.Current.Shutdown();
+	}
+
+	public override void Enter() { }
+
+	public override void Exit() { }
 }

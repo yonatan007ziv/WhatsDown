@@ -2,13 +2,12 @@
 using WhatsDown.Core.CommunicationProtocol.Enums;
 using WhatsDown.Core.Interfaces;
 using WhatsDown.Core.Models;
-using WhatsDown.Server.Interfaces.Services;
 using WhatsDown.Server.Interfaces.Services.Database;
 using WhatsDown.Server.Interfaces.Services.Security;
 
 namespace WhatsDown.Server.Services.Database.SqlDirect;
 
-internal class SqLiteDbHandler : IDatabaseHandler
+internal class SqLiteDbHandler : IDatabaseAnalyzer
 {
 	private readonly IHasher hasher;
 	private readonly ISalter salter;
@@ -16,7 +15,7 @@ internal class SqLiteDbHandler : IDatabaseHandler
 
 	private readonly SqliteConnection conn;
 
-	public SqLiteDbHandler(IHasher hasher, ISalter salter,IConfigurationFetcher configFetcher, ILogger logger)
+	public SqLiteDbHandler(IHasher hasher, ISalter salter, IConfigurationFetcher configFetcher, ILogger logger)
 	{
 		this.hasher = hasher;
 		this.salter = salter;
@@ -49,9 +48,9 @@ internal class SqLiteDbHandler : IDatabaseHandler
 
 	public Task<RegisterResult> VerifyRegister(string email, string password)
 	{
-		throw new NotImplementedException();
+		return Task.FromResult(RegisterResult.TwoFANeeded);
 	}
-	
+
 	private IEnumerable<ChatModel> GetChatHistoryTemp(int chathistorySuffix)
 	{
 		return new List<ChatModel>

@@ -2,9 +2,9 @@
 
 internal class ServiceNotRegisteredException : Exception
 {
-    public ServiceNotRegisteredException(string serviceName)
-        : base($"{serviceName} Service Not Registered")
-    {
+	public ServiceNotRegisteredException(string serviceName)
+		: base($"{serviceName} Service Not Registered")
+	{
 
-    }
+	}
 }

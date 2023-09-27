@@ -4,5 +4,5 @@ namespace WhatsDown.Core.Shared;
 
 public class TextEncoding
 {
-    public static readonly Encoding EncodingScheme = Encoding.UTF8;
+	public static readonly Encoding EncodingScheme = Encoding.UTF8;
 }
