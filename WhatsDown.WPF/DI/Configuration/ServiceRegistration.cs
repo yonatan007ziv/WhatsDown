@@ -96,8 +96,8 @@ class ServiceRegistration
 		services.AddScoped<IMessageSerializer, MessageSerializerService>();
 
 		// Login Register Requesters
-		services.AddScoped<ILoginRequest, MockLoginRequestService>();
-		// services.AddTransient<ILoginRequest, LoginRequestService>();
+		// services.AddScoped<ILoginRequest, MockLoginRequestService>();
+		services.AddScoped<ILoginRequest, LoginRequestService>();
 		services.AddScoped<IRegisterRequest, RegisterRequestService>();
 
 		// Validated User Requests

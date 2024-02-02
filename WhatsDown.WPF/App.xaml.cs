@@ -17,7 +17,6 @@ public partial class App : Application
 	public App()
 	{
 		IServiceCollection services = new ServiceCollection();
-
 		new ServiceRegistration(services).AddServices();
 		_serviceProvider = services.BuildServiceProvider();
 		_serviceProvider.GetRequiredService<ISettingsManager>(); // Initializes the App's Configuration

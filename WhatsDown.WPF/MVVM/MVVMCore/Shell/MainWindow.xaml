@@ -2,8 +2,8 @@
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:viewModels="clr-namespace:WhatsDown.WPF.MVVM.ViewModels.Pages" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 		mc:Ignorable="d"
 		Title="WhatsDown" Height="650" Width="1200"
 		Background="#272537"
@@ -30,11 +30,11 @@
 					<Button Width="20" Height="20"
 							Background="Transparent" BorderThickness="0" Foreground="Gray"
 							Content="🗕" Command="{Binding MinimizeCmd}" />
-					
+
 					<Button Width="20" Height="20"
 							Background="Transparent" BorderThickness="0" Foreground="Gray"
 							Content="🗖" Command="{Binding MaximizeCmd}" />
-					
+
 					<Button Width="20" Height="20"
 							Background="Transparent" BorderThickness="0" Foreground="Gray"
 							Content="✖" Command="{Binding CloseCmd }" />
@@ -42,7 +42,7 @@
 			</Grid>
 		</Border>
 
-		<ContentControl Grid.Row="1"
-					Content="{Binding Navigation.CurrentPage}"/>
+		<ContentControl Grid.Row="1" 
+		 			Content="{Binding Navigation.CurrentPage}"/>
 	</Grid>
 </Window>

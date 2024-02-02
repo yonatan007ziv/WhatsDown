@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+		<Label>teSTESTESTESTEST</Label>
     </Grid>
 </UserControl>

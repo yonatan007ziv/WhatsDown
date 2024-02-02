@@ -109,7 +109,7 @@ internal class ClientHandler : IClientHandler
 			_ = client.WriteMessage(new MessagePacket(CommunicationType.LoginResponse, LoginResult.InvalidCredentials));
 
 		string email = context.Params[0], password = context.Params[1];
-		LoginResult loginResult = await databaseHandler.VerifyLogin(email, password);
+		LoginResult loginResult = LoginResult.NoSuchEmailExists; // await databaseHandler.VerifyLogin(email, password);
 		if (loginResult == LoginResult.Success)
 		{
 			userId = await databaseHandler.GetUserId(email, password);
